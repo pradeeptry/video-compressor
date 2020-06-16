@@ -1,6 +1,7 @@
 package com.youtopin.videoconverter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.MediaCodecInfo;
 import android.media.MediaCodecList;
 import android.media.MediaExtractor;
@@ -8,11 +9,14 @@ import android.media.MediaFormat;
 import android.util.Log;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class MediaController {
     public final static String VIDEO_MIME_TYPE = "video/avc";
     public final static String AUIDO_MIME_TYPE = "audio/mp4a-latm";
     private static volatile MediaController Instance;
+    private ArrayList<VideoInfo> videoConvertQueue = new ArrayList<>();
+
 
     public static MediaController getInstance() {
         MediaController localInstance = Instance;
@@ -25,6 +29,10 @@ public class MediaController {
             }
         }
         return localInstance;
+    }
+
+    public void startVideoConvert(VideoInfo videoInfo) {
+        VideoConvertRunnable.runConversion(videoInfo);
     }
 
     private static class VideoConvertRunnable implements Runnable {
