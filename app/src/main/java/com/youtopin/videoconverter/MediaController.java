@@ -15,7 +15,6 @@ public class MediaController {
     public final static String VIDEO_MIME_TYPE = "video/avc";
     public final static String AUIDO_MIME_TYPE = "audio/mp4a-latm";
     private static volatile MediaController Instance;
-    private ArrayList<VideoInfo> videoConvertQueue = new ArrayList<>();
 
 
     public static MediaController getInstance() {
